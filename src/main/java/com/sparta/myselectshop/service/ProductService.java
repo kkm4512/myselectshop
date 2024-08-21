@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -29,5 +31,9 @@ public class ProductService {
         Product product = productRepository.findById(id).orElseThrow(() -> new NullPointerException("유효하지 않은 상품 입니다"));
         product.update(requestDto);
         return new ProductResponseDto(product);
+    }
+
+    public List<ProductResponseDto> getProducts() {
+        return productRepository.findAll().stream().map(ProductResponseDto::new).toList();
     }
 }
