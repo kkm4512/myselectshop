@@ -31,10 +31,9 @@ public class ProductController {
             @RequestParam("page") int page,
             @RequestParam("size") int size,
             @RequestParam("sortBy") String sortBy,
-            @RequestParam("isAsc") boolean isAsc,
-            @AuthenticationPrincipal UserDetailsImpl userDetails
+            @RequestParam("isAsc") boolean isAsc
     ) {
-        return productService.getProducts(userDetails.getUser(),
+        return productService.getProducts(
                 page-1, size, sortBy, isAsc
         );
     }

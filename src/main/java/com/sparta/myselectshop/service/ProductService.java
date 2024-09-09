@@ -8,6 +8,7 @@ import com.sparta.myselectshop.naver.dtos.ItemDto;
 import com.sparta.myselectshop.repository.FolderRepository;
 import com.sparta.myselectshop.repository.ProductFolderRepository;
 import com.sparta.myselectshop.repository.ProductRepository;
+import com.sparta.myselectshop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,7 @@ public class ProductService {
     public static final int MIN_MY_PRICE = 100;
     private final FolderRepository folderRepository;
     private final ProductFolderRepository productFolderRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public ProductResponseDto createProduct(ProductRequestDto requestDto, User user) {
@@ -43,8 +45,8 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductResponseDto> getProducts(User user, int page, int size, String sortBy, boolean isAsc) {
-
+    public Page<ProductResponseDto> getProducts(int page, int size, String sortBy, boolean isAsc) {
+        User user = userRepository.findById(1).orElseThrow();
         Sort.Direction direction = isAsc ?  Sort.Direction.ASC : Sort.Direction.DESC;
         Sort sort = Sort.by(direction, sortBy);
         Pageable pageable = PageRequest.of(page,size,sort);
