@@ -22,8 +22,8 @@ public class ProductController {
     }
 
     @PutMapping("/products/{id}")
-    public ProductResponseDto updateProduct(@PathVariable Long id, @RequestBody ProductMypriceRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return productService.updateProduct(id,requestDto,userDetails.getUser());
+    public ProductResponseDto updateProduct(@PathVariable Long id, @RequestBody ProductMypriceRequestDto requestDto) {
+        return productService.updateProduct(id,requestDto);
     }
 
     @GetMapping("/products")

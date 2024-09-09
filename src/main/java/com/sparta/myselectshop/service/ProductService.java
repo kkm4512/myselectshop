@@ -36,7 +36,7 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductResponseDto updateProduct(Long id, ProductMypriceRequestDto requestDto, User user) {
+    public ProductResponseDto updateProduct(Long id, ProductMypriceRequestDto requestDto) {
         int myprice = requestDto.getMyprice();
         if (myprice < MIN_MY_PRICE) throw new IllegalArgumentException("유효하지않은 관심 가격 입니다 최소 " + MIN_MY_PRICE + "원 이상 입니다");
         Product product = productRepository.findById(id).orElseThrow(() -> new NullPointerException("유효하지 않은 상품 입니다"));
