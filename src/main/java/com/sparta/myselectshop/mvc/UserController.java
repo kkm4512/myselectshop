@@ -1,4 +1,4 @@
-package com.sparta.myselectshop.controller;
+package com.sparta.myselectshop.mvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sparta.myselectshop.dto.SignupRequestDto;

@@ -1,8 +1,7 @@
-package com.sparta.myselectshop.controller;
+package com.sparta.myselectshop.mvc;
 
 import com.sparta.myselectshop.dto.FolderRequestDto;
 import com.sparta.myselectshop.dto.FolderResponseDto;
-import com.sparta.myselectshop.entity.Folder;
 import com.sparta.myselectshop.security.UserDetailsImpl;
 import com.sparta.myselectshop.service.FolderService;
 import lombok.RequiredArgsConstructor;
