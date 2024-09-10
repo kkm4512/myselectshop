@@ -184,7 +184,7 @@ function showProduct(folderId = null) {
 
     if (folderId) {
         dataSource = `/api/folders/${folderId}/products?sortBy=${sorting}&isAsc=${isAsc}`;
-    } else if(folderTargetId === undefined) {
+    } else if (folderTargetId === undefined) {
         dataSource = `/api/products?sortBy=${sorting}&isAsc=${isAsc}&folderId=${folderId}`;
     } else {
         dataSource = `/api/folders/${folderTargetId}/products?sortBy=${sorting}&isAsc=${isAsc}`;
@@ -286,7 +286,7 @@ function addFolder() {
             folderNames
         })
     }).done(function (data, textStatus, xhr) {
-        if(data !== '') {
+        if (data !== '') {
             alert("중복된 폴더입니다.");
             return;
         }
@@ -294,8 +294,9 @@ function addFolder() {
         alert('성공적으로 등록되었습니다.');
         window.location.reload();
     })
-        .fail(function(xhr, textStatus, errorThrown) {
-            alert("중복된 폴더입니다.");
+        .fail(function (xhr, textStatus, errorThrown) {
+            alert(xhr.responseJSON.errorMessage);
+            console.log(xhr.status)
         });
 }
 
@@ -362,15 +363,16 @@ function addInputForProductToFolder(productId, button) {
                     url: $(this).prop('action'),
                     data: $(this).serialize(),
                 }).done(function (data, textStatus, xhr) {
-                    if(data !== '') {
+                    if (data !== '') {
                         alert("중복된 폴더입니다.");
                         return;
                     }
                     alert('성공적으로 등록되었습니다.');
                     window.location.reload();
                 })
-                    .fail(function(xhr, textStatus, errorThrown) {
-                        alert("중복된 폴더입니다.");
+                    .fail(function (xhr, textStatus, errorThrown) {
+                        alert(xhr.responseJSON.errorMessage);
+                        console.log(xhr.status)
                     });
             });
         },
@@ -431,12 +433,12 @@ function getToken() {
 
     let auth = Cookies.get('Authorization');
 
-    if(auth === undefined) {
+    if (auth === undefined) {
         return '';
     }
 
     // kakao 로그인 사용한 경우 Bearer 추가
-    if(auth.indexOf('Bearer') === -1 && auth !== ''){
+    if (auth.indexOf('Bearer') === -1 && auth !== '') {
         auth = 'Bearer ' + auth;
     }
 
